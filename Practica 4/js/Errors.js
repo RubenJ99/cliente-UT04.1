@@ -1,3 +1,4 @@
+//RUBEN JUAREZ PEREZ 2DAW
 "use strict";
 function BaseException(message = "Default Message", fileName, lineNumber) {
   let instance = new Error(message, fileName, lineNumber);
@@ -121,7 +122,6 @@ function NonExistentMethodException() {
     "Error: The called method is not implemented"
   );
   instance.name = "NonExistentMethodException";
-  instance.param = param;
   return instance;
 }
 NonExistentMethodException.prototype = Object.create(BaseException.prototype);

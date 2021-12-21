@@ -1,3 +1,4 @@
+//RUBEN JUAREZ PEREZ 2DAW
 'use strict';
 /**
  * Esta clase hereda de List, aqui solo se podran insertar datos del tipo especifcado cuando se instancia y ademas mantenemos
@@ -24,7 +25,7 @@ function OrderedObjectList(capacity,type,order) {
         _storage.sort(this.order);
         return _storage.length;
     }
-
+    
     this.addAt = () => {
         throw new NonExistentMethodException();
     }

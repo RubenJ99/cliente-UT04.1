@@ -1,3 +1,4 @@
+//RUBEN JUAREZ PEREZ 2DAW
 'use strict';
 /**
  * Esta clase hereda de List, aqui solo se podran insertar datos del tipo especifcado cuando se instancia,
@@ -13,7 +14,7 @@ function ObjectList(capacity,type,stg = []) {
     let _storage = stg;
     List.call(this,capacity,_storage);
     this.type = type;
-    
+
     let _addObject = this.add;
     /**
      * Modificamos la funcion, primero guardamos la anterior en una variable y luego modificamos el add, 
@@ -26,6 +27,7 @@ function ObjectList(capacity,type,stg = []) {
         if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
         if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
         _addObject.call(this,elem);
+        return _storage.length;
     }
 
     let _addAtObject = this.addAt;
@@ -40,6 +42,7 @@ function ObjectList(capacity,type,stg = []) {
         if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
         
         _addAtObject.call(this,elem,index);
+        return _storage.length;
     }
 
     let _indexOfObject = this.indexOf;
@@ -52,7 +55,7 @@ function ObjectList(capacity,type,stg = []) {
         if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
         if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
-        _indexOfObject.call(this,elem);
+       return _indexOfObject.call(this,elem);
     }
     /**
      * Guardamos la funcion anterior en una variable y la modificamos; comprobamos que el valor es valido y 
@@ -64,7 +67,7 @@ function ObjectList(capacity,type,stg = []) {
         if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
         if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
-        _lastIndexOfObject.call(this,elem);
+        return _lastIndexOfObject.call(this,elem);
     }
     /**
      * Guardamos la funcion anterior en una variable y la modificamos; comprobamos que el valor es valido y 
@@ -76,7 +79,7 @@ function ObjectList(capacity,type,stg = []) {
         if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
         if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
-        _removeElementObject.call(this,elem);
+        return _removeElementObject.call(this,elem);
     }
     /**
      * Guardamos la funcion anterior en una variable y la modificamos; comprobamos que el valor es valido y 
@@ -88,7 +91,7 @@ function ObjectList(capacity,type,stg = []) {
         if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
         if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
-        _setObject.call(this,elem,index);
+        return _setObject.call(this,elem,index);
     }
 }
 ObjectList.prototype = Object.create(List.prototype);
