@@ -22,6 +22,7 @@ function OrderedObjectList(capacity,type,order) {
     this.add = function (elem) {
         addOrdObjList.call(this,elem);
         _storage.sort(this.order);
+        return _storage.length;
     }
 
     this.addAt = () => {

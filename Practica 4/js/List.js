@@ -70,7 +70,7 @@ function List(capacity,stg = []) {
     if(index < 0 || index > this.capacity) throw new IndexOutOfBoundsException();
     let dat = _storage[index];
     if(!dat) throw new IndexOutOfBoundsException();
-    return dat;
+    return JSON.stringify(dat);
   }
   /**
    * Recorremos la lista entera, y dependiendo de si es un objeto o no tratamos los datos de una manera u otra para
@@ -112,7 +112,7 @@ function List(capacity,stg = []) {
    * Retorna el maximo declarado cuando se instancio
    * @returns Number
    */
-  this.capacity = function () {
+  this.maxCapacity = function () {
     return this.capacity;
   }
   /**
@@ -127,9 +127,9 @@ function List(capacity,stg = []) {
    * @returns Any
    */
   this.firstElement = function () {
-    return _storage.find((elem)=>{
+    return JSON.stringify(_storage.find((elem)=>{
       return elem != undefined;
-    });
+    }));
   }
   /**
    * Dada una copia del array le damos la vuelta y buscamos la primera posicion del array con datos, retornamos esta
@@ -137,9 +137,9 @@ function List(capacity,stg = []) {
    */
   this.lastElement = function () {
     let _stgCopy = [..._storage];
-    return _stgCopy.reverse().find((elem) => {
+    return JSON.stringify(_stgCopy.reverse().find((elem) => {
       return elem != undefined;
-    })
+    }));
   }
   /**
    * Buscamos que el index sea valido y que tengamos un registro en esa posicion, si todo va correcto
@@ -152,7 +152,7 @@ function List(capacity,stg = []) {
     let data = _storage[index];
     if(!data) throw new IndexOutOfBoundsException();
     _storage.splice(index,1);
-    return data;
+    return JSON.stringify(data);
   }
   /**
    * Buscamos que el elemento, y si este es valido borramos la primera ocurrencia
@@ -161,9 +161,10 @@ function List(capacity,stg = []) {
    */
   this.removeElement = function (elem) {
     if(!elem) throw new EmptyValueException("elem");
-    return _storage.find((e) => {
-      return e === elem;
-    });
+    let indx = this.indexOf(elem);
+    let old = _storage[indx];
+    _storage.splice(indx,1);
+    return JSON.stringify(old);
   }
   /**
    * Dado un elemento y una posicion comprobamos que ambos valores son validos e insertamos en una buena posicion
@@ -173,10 +174,11 @@ function List(capacity,stg = []) {
    */
   this.set = function(elem,index){
     if(!elem) throw new EmptyValueException("elem");
-    if(!index) throw new EmptyValueException("index");
+    if(index == undefined) throw new EmptyValueException("index");
     if(index < 0 || index > this.capacity) throw new IndexOutOfBoundsException();
+    let prev = _storage[index];
     _storage[index] = elem;
-    return prev;
+    return JSON.stringify(prev);
   }
 }
 
