@@ -1,10 +1,10 @@
 "use strict";
 
-function List(capacity) {
-  if (!this instanceof List) throw new InvalidAccessConstructorException();
-  if (capacity <= 0) throw new EmptyValueException("Capacity");
+function List(capacity,stg = []) {
+  if (!(this instanceof List)) throw new InvalidAccessConstructorException();
+  if(!capacity) throw new EmptyValueException('capacity');
   this.capacity = capacity;
-  let _storage = [];
+  let _storage = stg;
   Object.defineProperty(this,'storage',{
     get: () => {return _storage},
   });
@@ -41,14 +41,15 @@ function List(capacity) {
   }
 
   this.toString = function () {
-    let str;
+    let str = " ";
     _storage.forEach((elem)=>{
       if(typeof(elem) === 'object'){
         str += JSON.stringify(elem) + '-';
+      }else{
+        str += elem + '-';
       }
-      str += elem + '-';
     });
-    return str;
+    return str.trimStart();
   }
   this.indexOf = function (elem) {
     if(!elem) throw new InvalidValueException("index","undefined");
