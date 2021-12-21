@@ -61,3 +61,56 @@ function InvalidValueException(param, value) {
 }
 InvalidValueException.prototype = Object.create(BaseException.prototype);
 InvalidValueException.prototype.constructor = InvalidValueException;
+//Excepcion tipo objeto invalido
+function InvalidTypeException(param,value) {
+  let instance = BaseException.call(
+    this,
+    "Error: The paramenter " +
+      param +
+      " has an invalid type. (" +
+      param +
+      ": " +
+      value +
+      ")"
+  );
+  instance.name = "InvalidTypeException";
+  instance.param = param;
+  instance.param = value;
+  return instance;
+}
+InvalidTypeException.prototype = Object.create(BaseException.prototype);
+InvalidTypeException.prototype.constructor = InvalidTypeException;
+
+//Excepcion instancia invalida
+function InvalidInstanceException(param,value) {
+  let instance = BaseException.call(
+    this,
+    "Error: The paramenter " +
+      param +
+      " has an invalid instance type. (" +
+      param +
+      ": " +
+      value +
+      ")"
+  );
+  instance.name = "InvalidInstanceException";
+  instance.param = param;
+  instance.param = value;
+  return instance;
+}
+
+InvalidInstanceException.prototype = Object.create(BaseException.prototype);
+InvalidInstanceException.prototype.constructor = InvalidInstanceException;
+
+//Excepcion Index out of bounds
+function IndexOutOfBoundsException(param) {
+  let instance = BaseException.call(
+    this,
+    "Error: The parameter " + param + " is out of bounds."
+  );
+  instance.name = "IndexOutOfBoundsException";
+  instance.param = param;
+  return instance;
+}
+EmptyValueException.prototype = Object.create(BaseException.prototype);
+EmptyValueException.prototype.constructor = EmptyValueException;
