@@ -87,37 +87,65 @@ function List(capacity,stg = []) {
     });
     return str.trimStart();
   }
+  /**
+   * Dado un elemento pasado por parametro como no sabemos si es primitivo o un objeto usamos Arrays.prototype.indexOf
+   * si es un objeto comparara si es el mismo punto de memoria
+   * @param {*} elem elemento a buscar
+   * @returns Number
+   */
   this.indexOf = function (elem) {
     if(!elem) throw new InvalidValueException("index","undefined");
     return _storage.indexOf(elem);
   }
-
+  /**
+   * Dado un elemento pasado por parametro como no sabemos si es primitivo o un objeto usamos Arrays.prototype.lastIndexOf
+   * si es un objeto comparara si es el mismo punto de memoria
+   * @param {*} elem elemento a buscar
+   * @returns Number
+   */
   this.lastIndexOf = function (elem) {
     if(!elem) throw new InvalidValueException("index","undefined");
     return _storage.lastIndexOf(elem);
   }
-
+  /**
+   * Retorna el maximo declarado cuando se instancio
+   * @returns Number
+   */
   this.capacity = function () {
     return this.capacity;
   }
-
+  /**
+   * Modificamos la longitud a 0 y asi se borra todo el contenido del array
+   * @returns undefined
+   */
   this.clear = function (){
     _storage.length = 0;
   }
-
+  /**
+   * Busca la primera posicion que contenga un dato dentro del array
+   * @returns Any
+   */
   this.firstElement = function () {
     return _storage.find((elem)=>{
       return elem != undefined;
     });
   }
-
+  /**
+   * Dada una copia del array le damos la vuelta y buscamos la primera posicion del array con datos, retornamos esta
+   * @returns Any
+   */
   this.lastElement = function () {
     let _stgCopy = [..._storage];
     return _stgCopy.reverse().find((elem) => {
       return elem != undefined;
     })
   }
-
+  /**
+   * Buscamos que el index sea valido y que tengamos un registro en esa posicion, si todo va correcto
+   * borramos los datos de esa posicion
+   * @param {*} index Valor de posicion
+   * @returns any
+   */
   this.remove = function (index) {
     if(index < 0 || index > this.capacity) throw new InvalidValueException("index","Out of bounds");
     let data = _storage[index];
@@ -125,20 +153,27 @@ function List(capacity,stg = []) {
     _storage.splice(index,1);
     return data;
   }
-
+  /**
+   * Buscamos que el elemento, y si este es valido borramos la primera ocurrencia
+   * @param {*} elem elemento a borrar
+   * @returns any
+   */
   this.removeElement = function (elem) {
     if(!elem) throw new EmptyValueException("Element can not be empty");
     return _storage.find((e) => {
       return e === elem;
     });
   }
-
+  /**
+   * Dado un elemento y una posicion comprobamos que ambos valores son validos e insertamos en una buena posicion
+   * @param {*} elem elemento que queremos insertar
+   * @param {*} index posicion en la que queremos insertar
+   * @returns Any
+   */
   this.set = function(elem,index){
     if(!elem) throw new EmptyValueException("Element can not be empty");
     if(!index) throw new EmptyValueException("Index can not be empty");
     if(index < 0 || index > this.capacity) throw new InvalidValueException("index","Out of bounds");
-    let prev = _storage[index];
-    if(!prev) throw new InvalidValueException("index","No records for this position");
     _storage[index] = elem;
     return prev;
   }
