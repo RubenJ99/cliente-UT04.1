@@ -90,7 +90,7 @@ function InvalidInstanceException(param,value) {
       " has an invalid instance type. (" +
       param +
       ": " +
-      value +
+      'must be: ' + value +
       ")"
   );
   instance.name = "InvalidInstanceException";
@@ -103,14 +103,38 @@ InvalidInstanceException.prototype = Object.create(BaseException.prototype);
 InvalidInstanceException.prototype.constructor = InvalidInstanceException;
 
 //Excepcion Index out of bounds
-function IndexOutOfBoundsException(param) {
+function IndexOutOfBoundsException() {
   let instance = BaseException.call(
     this,
-    "Error: The parameter " + param + " is out of bounds."
+    "Error: value is out of bounds."
   );
   instance.name = "IndexOutOfBoundsException";
+  return instance;
+}
+IndexOutOfBoundsException.prototype = Object.create(BaseException.prototype);
+IndexOutOfBoundsException.prototype.constructor = IndexOutOfBoundsException;
+
+//Excepcion metodo inexistente
+function NonExistentMethodException() {
+  let instance = BaseException.call(
+    this,
+    "Error: The called method is not implemented"
+  );
+  instance.name = "NonExistentMethodException";
   instance.param = param;
   return instance;
 }
-EmptyValueException.prototype = Object.create(BaseException.prototype);
-EmptyValueException.prototype.constructor = EmptyValueException;
+NonExistentMethodException.prototype = Object.create(BaseException.prototype);
+NonExistentMethodException.prototype.constructor = NonExistentMethodException;
+
+function FullListException() {
+  let instance = BaseException.call(
+    this,
+    "Error: the list is full"
+  );
+  instance.name = "FullListException";
+  instance.param = param;
+  return instance;
+}
+FullListException.prototype = Object.create(BaseException.prototype);
+FullListException.prototype.constructor = FullListException;

@@ -11,8 +11,9 @@ function List(capacity,stg = []) {
   if(!capacity) throw new EmptyValueException('capacity');
   this.capacity = capacity;
   let _storage = stg;
+
   Object.defineProperty(this,'storage',{
-    get: () => {return _storage},
+    get: () => {return _storage}, //solo pongo el getter porque no tiene mucho sentido tener un campo privado como el array con un setter
   });
   /**
    * Comprueba si la longitud del array es 0 en cuyo caso esta vacio
@@ -42,8 +43,8 @@ function List(capacity,stg = []) {
    * @returns Number
    */
   this.add = function (elem) {
-    if(this.isFull()) throw new BaseException("Maximum capacity reached");
-    if(elem === undefined) throw new EmptyValueException('elem');
+    if(this.isFull()) throw new FullListException();
+    if(!elem) throw new EmptyValueException('elem');
     _storage.push(elem);
     return _storage.length;
   }
@@ -55,8 +56,8 @@ function List(capacity,stg = []) {
    * @returns Number
    */
   this.addAt = function (elem,index) {
-    if(this.isFull()) throw new BaseException("Maximum capacity reached");
-    if(index < 0 || index > this.capacity) throw new InvalidValueException("index",'Index out of Bounds');
+    if(this.isFull()) throw new FullListException();
+    if(index < 0 || index > this.capacity) throw new IndexOutOfBoundsException();
     _storage.splice(index,0,elem);
     return _storage.length;
   }
@@ -66,9 +67,9 @@ function List(capacity,stg = []) {
    * @returns Any
    */
   this.get = function (index) {
-    if(index < 0 || index > this.capacity) throw new InvalidValueException('index','Index out of Bounds');
+    if(index < 0 || index > this.capacity) throw new IndexOutOfBoundsException();
     let dat = _storage[index];
-    if(!dat) throw new InvalidValueException('index','No records for this Index value');
+    if(!dat) throw new IndexOutOfBoundsException();
     return dat;
   }
   /**
@@ -94,7 +95,7 @@ function List(capacity,stg = []) {
    * @returns Number
    */
   this.indexOf = function (elem) {
-    if(!elem) throw new InvalidValueException("index","undefined");
+    if(!elem) throw new EmptyValueException('elem')
     return _storage.indexOf(elem);
   }
   /**
@@ -104,7 +105,7 @@ function List(capacity,stg = []) {
    * @returns Number
    */
   this.lastIndexOf = function (elem) {
-    if(!elem) throw new InvalidValueException("index","undefined");
+    if(!elem) throw new EmptyValueException('elem');
     return _storage.lastIndexOf(elem);
   }
   /**
@@ -147,9 +148,9 @@ function List(capacity,stg = []) {
    * @returns any
    */
   this.remove = function (index) {
-    if(index < 0 || index > this.capacity) throw new InvalidValueException("index","Out of bounds");
+    if(index < 0 || index > this.capacity) throw new IndexOutOfBoundsException();
     let data = _storage[index];
-    if(!data) throw new InvalidValueException("index","No records for this position");
+    if(!data) throw new IndexOutOfBoundsException();
     _storage.splice(index,1);
     return data;
   }
@@ -159,7 +160,7 @@ function List(capacity,stg = []) {
    * @returns any
    */
   this.removeElement = function (elem) {
-    if(!elem) throw new EmptyValueException("Element can not be empty");
+    if(!elem) throw new EmptyValueException("elem");
     return _storage.find((e) => {
       return e === elem;
     });
@@ -171,9 +172,9 @@ function List(capacity,stg = []) {
    * @returns Any
    */
   this.set = function(elem,index){
-    if(!elem) throw new EmptyValueException("Element can not be empty");
-    if(!index) throw new EmptyValueException("Index can not be empty");
-    if(index < 0 || index > this.capacity) throw new InvalidValueException("index","Out of bounds");
+    if(!elem) throw new EmptyValueException("elem");
+    if(!index) throw new EmptyValueException("index");
+    if(index < 0 || index > this.capacity) throw new IndexOutOfBoundsException();
     _storage[index] = elem;
     return prev;
   }

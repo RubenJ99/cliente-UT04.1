@@ -23,8 +23,8 @@ function ObjectList(capacity,type,stg = []) {
      * @param {*} elem elemento a introducir
      */
     this.add = function (elem) {
-        if(!(typeof(elem) === 'object')) throw new InvalidValueException("elem","Invalid type, object required");
-        if(!(elem instanceof this.type)) throw new InvalidValueException("elem",`Object is not a ${this.type}`);
+        if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
+        if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
         _addObject.call(this,elem);
     }
 
@@ -36,8 +36,8 @@ function ObjectList(capacity,type,stg = []) {
      * @param {*} index posicion en la que introducir
      */
     this.addAt = function (elem,index) {
-        if(!(typeof(elem) === 'object')) throw new InvalidValueException("elem","Invalid type, object required");
-        if(!(elem instanceof this.type)) throw new InvalidValueException("elem",`Object is not a ${this.type}`);
+        if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
+        if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
         
         _addAtObject.call(this,elem,index);
     }
@@ -49,8 +49,8 @@ function ObjectList(capacity,type,stg = []) {
      * @param {*} elem Elemento a introducir
      */
     this.indexOf = function (elem) {
-        if(!(typeof(elem) === 'object')) throw new InvalidValueException("elem","Invalid type, object required");
-        if(!(elem instanceof this.type)) throw new InvalidValueException("elem",`Object is not a ${this.type}`);
+        if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
+        if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
         _indexOfObject.call(this,elem);
     }
@@ -61,8 +61,8 @@ function ObjectList(capacity,type,stg = []) {
      */
     let _lastIndexOfObject = this.lastIndexOf;
     this.lastIndexOf = function (elem) {
-        if(!(typeof(elem) === 'object')) throw new InvalidValueException("elem","Invalid type, object required");
-        if(!(elem instanceof this.type)) throw new InvalidValueException("elem",`Object is not a ${this.type}`);
+        if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
+        if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
         _lastIndexOfObject.call(this,elem);
     }
@@ -73,8 +73,8 @@ function ObjectList(capacity,type,stg = []) {
      */
     let _removeElementObject = this.removeElement;
     this.removeElement = function (elem) {
-        if(!(typeof(elem) === 'object')) throw new InvalidValueException("elem","Invalid type, object required");
-        if(!(elem instanceof this.type)) throw new InvalidValueException("elem",`Object is not a ${this.type}`);
+        if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
+        if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
         _removeElementObject.call(this,elem);
     }
@@ -85,8 +85,8 @@ function ObjectList(capacity,type,stg = []) {
      */
     let _setObject = this.set;
     this.set = function (elem,index) {
-        if(!(typeof(elem) === 'object')) throw new InvalidValueException("elem","Invalid type, object required");
-        if(!(elem instanceof this.type)) throw new InvalidValueException("elem",`Object is not a ${this.type}`);
+        if(!(typeof(elem) === 'object')) throw new InvalidTypeException('elem',typeof(elem));
+        if(!(elem instanceof this.type)) throw new InvalidInstanceException('elem',this.type);
 
         _setObject.call(this,elem,index);
     }

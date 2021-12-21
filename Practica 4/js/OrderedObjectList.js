@@ -24,9 +24,15 @@ function OrderedObjectList(capacity,type,order) {
         _storage.sort(this.order);
     }
 
-    this.addAt = undefined;
-    this.lastIndexOf = undefined;
-    this.set = undefined;
+    this.addAt = () => {
+        throw new NonExistentMethodException();
+    }
+    this.lastIndexOf = () => {
+        throw new NonExistentMethodException();
+    }
+    this.set = () => {
+        throw new NonExistentMethodException();
+    }
 
 }
 OrderedObjectList.prototype = Object.create(ObjectList.prototype);
