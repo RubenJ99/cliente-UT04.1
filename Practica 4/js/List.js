@@ -51,20 +51,60 @@ function List(capacity) {
     return str;
   }
   this.indexOf = function (elem) {
-    if(elem === undefined) throw new InvalidValueException("index","undefined");
+    if(!elem) throw new InvalidValueException("index","undefined");
     return _storage.indexOf(elem);
   }
 
   this.lastIndexOf = function (elem) {
-    if(elem === undefined) throw new InvalidValueException("index","undefined");
+    if(!elem) throw new InvalidValueException("index","undefined");
     return _storage.lastIndexOf(elem);
   }
 
+  this.capacity = function () {
+    return this.capacity;
+  }
+
+  this.clear = function (){
+    _storage.length = 0;
+  }
+
+  this.firstElement = function () {
+    return _storage.find((elem)=>{
+      return elem != undefined;
+    });
+  }
+
+  this.lastElement = function () {
+    let _stgCopy = [..._storage];
+    return _stgCopy.reverse().find((elem) => {
+      return elem != undefined;
+    })
+  }
+
+  this.remove = function (index) {
+    if(index < 0 || index > this.capacity) throw new InvalidValueException("index","Out of bounds");
+    let data = _storage[index];
+    if(!data) throw new InvalidValueException("index","No records for this position");
+    _storage.splice(index,1);
+    return data;
+  }
+
+  this.removeElement = function (elem) {
+    if(!elem) throw new EmptyValueException("Element can not be empty");
+    return _storage.find((e) => {
+      return e === elem;
+    });
+  }
+
+  this.set = function(elem,index){
+    if(!elem) throw new EmptyValueException("Element can not be empty");
+    if(!index) throw new EmptyValueException("Index can not be empty");
+    if(index < 0 || index > this.capacity) throw new InvalidValueException("index","Out of bounds");
+    let prev = _storage[index];
+    if(!prev) throw new InvalidValueException("index","No records for this position");
+    _storage[index] = elem;
+    return prev;
+  }
 }
 
-
-let listita = new List(5);
-
-listita.add(1)
-console.log(listita.storage);
-console.log(listita.indexOf(book))
+List.prototype.constructor = List;
